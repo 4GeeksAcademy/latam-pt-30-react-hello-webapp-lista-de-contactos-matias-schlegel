@@ -1,0 +1,28 @@
+.img1 {
+    max-width: 10rem;
+    object-fit: cover;
+}
+
+.notNavbar {
+    display: flex;
+    justify-content: end;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+
+.perfil p {
+    margin-block-start: 2px;
+    margin-block-end: 2px;
+    font-size: 20px;
+}
+
+.perfil h5 {
+    margin-top: 0.7rem;
+    margin-bottom: 0;
+    font-size: 30px;
+}
+
+.buttonEdit {
+    margin-left: 1rem;
+}

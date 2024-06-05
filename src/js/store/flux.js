@@ -1,18 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contactos: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,6 +26,76 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			fetchContactos: async () => {
+				try {
+					const response = await fetch("https://playground.4geeks.com/contact/agendas/matischlegel/contacts")
+					if (response.ok == false) {
+						throw new Error("Levante un error en response")
+					}
+					const data = await response.json();
+					console.log(data)
+					setStore({contactos: data.contacts})
+				} catch(error) {
+					console.log(error)
+				}
+			},
+			addContact: async (contact) => {
+				try{
+					console.log(contact)
+					const response = await fetch("https://playground.4geeks.com/contact/agendas/matischlegel/contacts", {
+						method: "POST",
+						body: JSON.stringify(contact),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					})
+					if (response.ok == false) {
+						throw new Error("Levante un error en response")
+					}
+
+					const data = await response.json()
+					setStore({ contactos: [...getStore().contactos, data] })
+				
+				} catch(error) {
+					console.log(error)
+				}
+			},
+			 updateContact: async (updatedContact) => {
+                try {
+                    const response = await fetch(`https://playground.4geeks.com/contact/agendas/matischlegel/contacts/${updatedContact.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedContact)
+                    });
+
+					const data = await response.json()
+                    if (response.ok) {
+                        const updateContacts = getStore().contactos.map(
+							contact => contact.id === updatedContact.id ? data : contact)
+					setStore ({ contactos: updateContacts })
+                    } 
+                } catch(error) {
+					console.log(error)
+				}
+            },
+			deleteContact: async (id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/matischlegel/contacts/${id}`, {
+						method: "DELETE"
+					})
+					if (response.ok == false) {
+						throw new Error("Levante un error en response")
+					}
+					
+					const contactDelete = getStore().contactos.filter(contact => contact.id !== id)
+					setStore ({ contactos: contactDelete })
+					
+				} catch(error) {
+					console.log(error)
+				}
 			}
 		}
 	};
