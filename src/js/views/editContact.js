@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import "../../styles/home.css";
 import { Context } from "../store/appContext";
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom"
@@ -38,6 +37,8 @@ export const EditContact = () => {
 
     return (
         <React.Fragment>
+            <div className="vh-100 d-flex align-items-center">
+            <div className="containerAddContact col-12">
             <h1 className="titulo d-flex justify-content-center">Edit Contact</h1>
             <div className="input p-5">
                 <label htmlFor="fullname">
@@ -87,12 +88,14 @@ export const EditContact = () => {
             </div>
             <div className="d-flex justify-content-center">
                 <Link 
-                    to={`/demo`}
+                    to= "/demo"
                      className="btn btn-success"
                      onClick={handleSubmit}
                      > Save Contact </Link>
             </div>
-            
+            </div>
+            </div>
+        
         </React.Fragment>
     );
 };

@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
-			 updateContact: async (updatedContact) => {
+			updateContact: async (updatedContact) => {
                 try {
                     const response = await fetch(`https://playground.4geeks.com/contact/agendas/matischlegel/contacts/${updatedContact.id}`, {
                         method: 'PUT',
@@ -94,6 +94,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore ({ contactos: contactDelete })
 					
 				} catch(error) {
+					console.log(error)
+				}
+			},
+			createUser: async (contact) => {
+				try {
+					const response = await fetch("https://playground.4geeks.com/contact/agendas/matischlegel", {
+						method: "POST",
+						body: JSON.stringify(contact),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					})
+						if (!response.ok) {
+							throw new Error("Levante un error")
+						}
+					} catch(error) {
 					console.log(error)
 				}
 			}

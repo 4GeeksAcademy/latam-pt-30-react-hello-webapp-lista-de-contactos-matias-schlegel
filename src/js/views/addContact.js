@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import "../../styles/home.css";
+import "./../../styles/addContact.css"
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom"
 
@@ -13,17 +13,23 @@ export const AddContacto = () => {
     const { store, actions } = useContext(Context);
 
     const handleSubmit = () => {
-        const newContact = {
-            name: fullname,
-            email: email,
-            phone: phone,
-            address: address
-        };
-        actions.addContact(newContact);
-        setFullname('');
-        setEmail('');
-        setPhone('');
-        setAddress('');
+        if (!fullname.trim() || !email.trim() || !phone.trim() || !address.trim()) {
+            alert(
+                "No se puede mandar un contacto vacio"
+              )
+        } else {
+            const newContact = {
+                name: fullname,
+                email: email,
+                phone: phone,
+                address: address
+            };
+            actions.addContact(newContact);
+            setFullname('');
+            setEmail('');
+            setPhone('');
+            setAddress('');
+        }
     };
 
     return (

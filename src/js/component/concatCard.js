@@ -13,9 +13,9 @@ export const ContactCard = ({ contact, contactDelete, contactUpdate}) => {
                 <div className="d-flex justify-content-between w-100">
                     <div className="perfil">
                         <h5>{contact.name}</h5>
-                        <p><i class="fa-solid fa-envelope"></i> {contact.email}</p>
-                        <p><i class="fa-solid fa-phone"></i> {contact.phone}</p>
-                        <p><i class="fa-solid fa-location-dot"></i> {contact.address}</p>
+                        <p><i className="fa-solid fa-envelope"></i> {contact.email}</p>
+                        <p><i className="fa-solid fa-phone"></i> {contact.phone}</p>
+                        <p><i className="fa-solid fa-location-dot"></i> {contact.address}</p>
                     </div>
 
                     <div className="">
@@ -23,12 +23,12 @@ export const ContactCard = ({ contact, contactDelete, contactUpdate}) => {
                     to={`/edit/${contact.id}`}
                     className="btn"
                     style={{ marginRight: '0.5rem' }}
-                    ><i class="fa fa-pencil" aria-hidden="true"></i></Link>
+                    ><i className="fa fa-pencil" aria-hidden="true"></i></Link>
                         <button 
                             className="btn"
                             onClick={() => contactDelete(contact.id)}
                         >
-                            <i class="fa-solid fa-trash"></i>
+                            <i className="fa-solid fa-trash"></i>
                         </button>
                     </div>
                 </div>

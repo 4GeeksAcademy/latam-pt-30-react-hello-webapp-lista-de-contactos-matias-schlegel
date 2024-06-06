@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/demo.css";
+import "./../../styles/navbar.css"
+import "./../../styles/concat.css"
 import { ContactCard } from "../component/concatCard";
 import { Navbar } from "./../component/navbar.js";
 
@@ -8,7 +9,13 @@ export const Contacts = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        actions.fetchContactos();
+        const initializeContacts = async () => {
+           await actions.fetchContactos();
+        if (!store.contactos.length) {
+            await actions.createUser()
+            }
+        }
+        initializeContacts();
     }, []);
 
     const handleDelete = (id) => {
