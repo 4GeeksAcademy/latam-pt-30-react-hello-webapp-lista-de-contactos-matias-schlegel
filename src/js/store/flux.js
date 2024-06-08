@@ -71,12 +71,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify(updatedContact)
                     });
 
-					const data = await response.json()
                     if (response.ok) {
-                        const updateContacts = getStore().contactos.map(
-							contact => contact.id === updatedContact.id ? data : contact)
-					setStore ({ contactos: updateContacts })
-                    } 
+                        const actions = getActions()
+						actions.fetchContactos()
+                    }
                 } catch(error) {
 					console.log(error)
 				}

@@ -10,10 +10,10 @@ export const Contacts = () => {
 
     useEffect(() => {
         const initializeContacts = async () => {
+            if (!store.contactos.length) {
+                await actions.createUser()
+                }
            await actions.fetchContactos();
-        if (!store.contactos.length) {
-            await actions.createUser()
-            }
         }
         initializeContacts();
     }, []);
