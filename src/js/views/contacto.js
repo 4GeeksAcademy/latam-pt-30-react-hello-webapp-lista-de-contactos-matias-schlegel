@@ -9,13 +9,7 @@ export const Contacts = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        const initializeContacts = async () => {
-            if (!store.contactos.length) {
-                await actions.createUser()
-                }
-           await actions.fetchContactos();
-        }
-        initializeContacts();
+          actions.fetchContactos();
     }, []);
 
     const handleDelete = (id) => {

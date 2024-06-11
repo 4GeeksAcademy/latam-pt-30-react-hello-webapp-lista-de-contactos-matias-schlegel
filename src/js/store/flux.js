@@ -30,6 +30,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchContactos: async () => {
 				try {
 					const response = await fetch("https://playground.4geeks.com/contact/agendas/matischlegel/contacts")
+					if (response.status === 404) {
+                        await getActions().createUser();
+                        await getActions().fetchContactos();
+                    }
 					if (response.ok == false) {
 						throw new Error("Levante un error en response")
 					}
